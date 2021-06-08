@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 30px; /* maybe change back to zero later */
   background-color: #3f3f3f;
 }
 
