@@ -1,11 +1,13 @@
-import ExpenseItem from './components/ExpenseItem';
+import React from "react";
+import Expenses from "./components/Expenses";
 
 function App() {
-  return (
-    <div>
-      <ExpenseItem />
-    </div>
-  );
+	
+	return (
+		<div>
+			<Expenses />
+		</div>
+	);
 }
 
 export default App;
