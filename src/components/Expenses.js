@@ -28,7 +28,7 @@ const expenses = [
 const Expenses = () => {
   const list = expenses.map((expense) => {
     return (
-      <ExpenseItem
+      <ExpenseItem key={expense.id}
         title={expense.title}
         amount={expense.amount}
         date={expense.date}
