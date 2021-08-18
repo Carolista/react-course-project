@@ -4,14 +4,7 @@ import Card from '../UI/Card';
 import './Expenses.css';
 import ExpensesFilter from "./ExpensesFilter";
 
-const handleAddExpense = (expense) => {
-  console.log(expense);
-};
-
 const Expenses = (props) => {
-
-  // Still need to lift state here when changing actual data
-  const [ filterYear, setFilterYear ] = useState("2021");
 
   const list = props.items.map((expense) => {
     return (
@@ -23,15 +16,35 @@ const Expenses = (props) => {
     );
   });
 
+  const [ filterYear, setFilterYear ] = useState("2021");
+  const [ filteredList, setFilteredList ] = useState(list);
+
+  const getFilteredList = () => {
+    let filteredItems = props.items.filter((item) => {
+      return String(item.date.getFullYear()) === filterYear;
+    });
+    return filteredItems.map((expense) => {
+      return (
+        <ExpenseItem key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      );
+    });
+  };
+
   const handleFilterChange = (event) => {
-    console.log(event.target.value);
     setFilterYear(event.target.value);
+    console.log(getFilteredList());
+    setFilteredList(getFilteredList);
   }
 
   return (
     <Card className="expenses">
       <ExpensesFilter selectedYear={filterYear} handleChange={handleFilterChange} />
-      {list}
+      {filteredList.length === 0 && <p>No results found.</p>}
+      {filteredList.length > 0 && filteredList}
     </Card>
   )
 };
